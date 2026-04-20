@@ -67,7 +67,9 @@ pipeline {
                     set SONAR_TOKEN=%SONAR_TOKEN%
 
                     :: Run scanner - explicitly point settings back to workspace root
-                    bin\\sonar-scanner.bat -Dproject.settings=..\\sonar-project.properties
+                    bin\sonar-scanner.bat ^
+                        -Dproject.settings=..\sonar-project.properties ^
+                        -Dsonar.login=%SONAR_TOKEN%
                 '''
             }
         }
