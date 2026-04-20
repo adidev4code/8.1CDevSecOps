@@ -50,26 +50,15 @@ pipeline {
             }
         }
 
-        stage('SonarCloud Analysis') {
+                stage('SonarCloud Analysis') {
             steps {
-                echo 'Downloading and running SonarScanner CLI for SonarCloud analysis...'
+                echo 'Running SonarCloud analysis...'
                 bat '''
-                    :: Download SonarScanner CLI zip
-                    curl -Lo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-windows.zip
-
-                    :: Extract the archive
-                    powershell -Command "Expand-Archive -Path sonar-scanner.zip -DestinationPath . -Force"
-
-                    :: Move into the scanner directory
-                    cd sonar-scanner-5.0.1.3006-windows
-
-                    :: Pass the token as an environment variable (SonarScanner reads SONAR_TOKEN automatically)
-                    set SONAR_TOKEN=%SONAR_TOKEN%
-
-                    :: Run scanner - explicitly point settings back to workspace root
-                    bin\sonar-scanner.bat ^
-                        -Dproject.settings=..\sonar-project.properties ^
-                        -Dsonar.login=%SONAR_TOKEN%
+                curl -Lo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-windows.zip
+                powershell -Command "Expand-Archive -Path sonar-scanner.zip -DestinationPath . -Force"
+                cd sonar-scanner-5.0.1.3006-windows
+                set SONAR_TOKEN=%SONAR_TOKEN%
+                bin\\sonar-scanner.bat -Dproject.settings=..\\sonar-project.properties -Dsonar.login=%SONAR_TOKEN%
                 '''
             }
         }
