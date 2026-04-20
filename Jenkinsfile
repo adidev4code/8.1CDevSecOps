@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code from GitHub repository...'
-                git branch: 'main', url: 'https://github.com/adidev4code/8.2CDevSecOps.git'
+                git branch: 'main', url: 'https://github.com/adidev4code/8.1CDevSecOps.git'
             }
         }
 
