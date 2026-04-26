@@ -46,8 +46,7 @@ pipeline {
                 bat '''
                 curl -Lo sonar.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-windows.zip
                 powershell -Command "Expand-Archive -Path sonar.zip -DestinationPath . -Force"
-                cd sonar-scanner-5.0.1.3006-windows
-                bin\\sonar-scanner.bat -Dproject.settings=..\\sonar-project.properties -Dsonar.token=%SONAR_TOKEN%
+                sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat -Dsonar.projectKey=adidev4code_8.1CDevSecOps -Dsonar.organization=adidev4code -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=. -Dsonar.exclusions=node_modules/**,test/** -Dsonar.token=%SONAR_TOKEN%
                 '''
             }
         }
